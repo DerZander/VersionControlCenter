@@ -1,0 +1,73 @@
+{
+  "name": "version-control-center",
+  "version": "0.1.0",
+  "author": {
+    "name": "Timo Zander"
+  },
+  "private": true,
+  "description": "A desktop workspace for managing Git repositories.",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "test": "npm run build && node --test",
+    "dist:win": "npm run build && cross-env NODE_USE_SYSTEM_CA=1 electron-builder --win nsis --config.electronDist=node_modules\\electron\\dist",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json"
+  },
+  "dependencies": {
+    "electron": "^45.0.0",
+    "lucide-react": "^0.468.0",
+    "simple-git": "^4.0.2"
+  },
+  "devDependencies": {
+    "@electron-toolkit/preload": "^3.0.2",
+    "@electron-toolkit/tsconfig": "^1.0.1",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "cross-env": "^10.1.0",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^3.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  },
+  "allowScripts": {
+    "esbuild": true,
+    "electron@45.0.0": true
+  },
+  "build": {
+    "appId": "com.versioncontrolcenter.app",
+    "productName": "Version Control Center",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Version Control Center"
+    }
+  }
+}
