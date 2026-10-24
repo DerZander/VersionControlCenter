@@ -4,7 +4,6 @@ import { promises as fs } from 'node:fs'
 import { basename, dirname, isAbsolute, join, relative, resolve, sep } from 'node:path'
 import { tmpdir } from 'node:os'
 import { randomUUID } from 'node:crypto'
-import { fileURLToPath } from 'node:url'
 import { simpleGit, type SimpleGit } from 'simple-git'
 import { defaultSettings } from '../shared/types'
 import { getCommitFiles, getCommitFileDiff } from './commitDetails'
@@ -22,7 +21,7 @@ import type {
   Workspace
 } from '../shared/types'
 
-const currentDir = dirname(fileURLToPath(import.meta.url))
+const currentDir = __dirname
 let mainWindow: BrowserWindow | undefined
 let language: Language = defaultSettings.language
 
